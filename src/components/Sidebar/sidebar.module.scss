@@ -1,0 +1,246 @@
+// =============================================================================
+// SIDEBAR COMPONENT STYLES
+// =============================================================================
+
+// Base sidebar styles
+.sidebar,
+.sidebar--closed {
+  width: 300px;
+  height: 100vh;
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+  background-color: var(--color-sidebar-background-default);
+}
+
+// =============================================================================
+// LOGO SECTION
+// =============================================================================
+
+.sidebar--logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+
+  img {
+    width: 60px;
+  }
+
+  span {
+    color: var(--color-text-logo-default);
+    font-weight: bold;
+    font-size: 22px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Toggle button
+.sidebar--toggle__btn {
+  cursor: pointer;
+  width: 32px;
+  transition: 0.3s;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -32px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  background-color: var(--sidebar-toggle-button-background);
+  svg {
+    color: var(--color-logo-toggle-button);
+  }
+}
+
+// =============================================================================
+// ROUTES SECTION
+// =============================================================================
+
+.sidebar--routes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 40px - 110px);
+}
+
+.sidebar--routes__items {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: var(--color-text-default);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 20px;
+    transition: 0.2s;
+    white-space: nowrap;
+    background-color: var(--color-button-background-default);
+    border-radius: 15px;
+    margin: 5px 0;
+
+    span {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    &:hover {
+      background-color: var(--color-button-background-active);
+      color: var(--color-text-hover);
+    }
+
+    &.active {
+      background-color: var(--color-button-background-active);
+      color: var(--color-text-logo-default);
+    }
+  }
+
+  svg {
+    margin-right: 15px;
+    transition: margin-right 0.3s ease;
+  }
+}
+
+// =============================================================================
+// BOTTOM CONTENT SECTION
+// =============================================================================
+
+.sidebar--bottom_content {
+  margin-top: auto;
+}
+
+// =============================================================================
+// THEME TOGGLE SECTION
+// =============================================================================
+
+.sidebar--theme_section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--theme-section-border);
+  opacity: 0.8;
+}
+
+.sidebar--theme_toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--color-button-background-default);
+  border: none;
+  border-radius: 12px;
+  color: var(--color-text-default);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-button-background-active);
+    color: var(--color-text-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.sidebar--theme_icon {
+  margin-right: 12px;
+  font-size: 16px;
+  transition: transform 0.3s ease, margin-right 0.3s ease;
+
+  .sidebar--theme_toggle:hover & {
+    transform: rotate(180deg);
+  }
+}
+
+.sidebar--theme_text {
+  font-weight: 600;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateX(0);
+  white-space: nowrap;
+}
+
+// =============================================================================
+// CLOSED STATE MODIFIER
+// =============================================================================
+
+.sidebar--closed {
+  width: 100px;
+  animation: sidebar-animate ease-in-out 0.5s;
+
+  // Logo adjustments for closed state
+  .sidebar--logo {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    img {
+      margin: 0 auto;
+    }
+
+    span {
+      opacity: 0;
+      transform: translateX(-20px);
+      pointer-events: none;
+      display: none;
+    }
+
+    .sidebar--toggle__btn {
+      right: -80px;
+      background-color: var(--sidebar-closed-toggle-button-background);
+    }
+  }
+
+  // Routes adjustments for closed state
+  .sidebar--routes {
+    .sidebar--routes__items {
+      a {
+        span {
+          opacity: 0;
+          transform: translateX(-20px);
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  // Theme toggle adjustments for closed state
+  .sidebar--theme_section {
+    .sidebar--theme_toggle {
+      justify-content: center;
+      padding: 12px 8px;
+
+      .sidebar--theme_icon {
+        margin-right: 0;
+      }
+
+      .sidebar--theme_text {
+        opacity: 0;
+        transform: translateX(-20px);
+        pointer-events: none;
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes sidebar-animate {
+  0% {
+    width: 300px;
+  }
+  50% {
+    width: 80px;
+  }
+  100% {
+    width: 100px;
+  }
+}
